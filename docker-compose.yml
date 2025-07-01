@@ -1,23 +1,16 @@
 version: '3.8'
 
 services:
-  fastapi-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  api:
+    build: .
     container_name: consolidator-ai-api
     ports:
-      - "3005:3005"
-    env_file:
-      - .env
+      - "8001:8001"
     environment:
-      - PYTHONPATH=/app
-    restart: unless-stopped
-    volumes:
-      - ./uploads:/app/uploads
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge 
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_NAME=consolidator_db
+      - DB_USER=consolidator_admin
+      - DB_PASSWORD=your_password_here
+    extra_hosts:
+      - "host.docker.internal:host-gateway" 
