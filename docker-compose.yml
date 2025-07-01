@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: consolidator-ai-api
     ports:
-      - "8000:8000"
+      - "3005:3005"
     env_file:
       - .env
     environment:
